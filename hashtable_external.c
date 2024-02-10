@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define MAX_NAME 256
 #define TABLE_SIZE 10
@@ -85,6 +86,18 @@ person *hash_table_lookup(char *name){
     return tmp;
 }
 
+void reset_hash_table() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        person *current = hash_table[i];
+        while (current != NULL) {
+            person *next = current->next;
+            free(current);
+            current = next;
+        }
+        hash_table[i] = NULL;
+    }
+}
+
 int main(){
  
     init_hash_table();
@@ -119,6 +132,11 @@ int main(){
     }
 
     hash_table_delete("Luisa");
+
+    print_table();
+
+    // Reset the hashtable
+    init_hash_table();
 
     print_table();
 
