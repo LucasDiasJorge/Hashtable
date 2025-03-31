@@ -9,7 +9,7 @@ Person* hashtable[TABLE_SIZE];
 
 void init_hashtable() {
     for (int i = 0; i < TABLE_SIZE; i++) {
-        hashtable[i] = NULL;
+        hashtable[i] = nullptr;
     }
 }
 
@@ -38,6 +38,14 @@ bool insert(const std::string& name, int age) {
 
     hashtable[index] = new_person;
     return true;
+}
+
+bool find(const std::string& name) {
+    unsigned int index = hash(name);
+    if (hashtable[index] != nullptr && hashtable[index] != DELETED_NODE) {
+        return true;
+    }
+    return false;
 }
 
 void print_table() {
@@ -75,29 +83,47 @@ int main() {
 
     init_hashtable();
 
-    if (insert("Lucas", 22)) {
-        std::cout << "true" << std::endl;
-    } else {
-        std::cout << "false" << std::endl;
+    if (find("Lucas")) {
+        std::cout << "Lucas was found" << std::endl;
+    }else {
+        std::cout << "Lucas wasn't found" << std::endl;
     }
 
-    print_table(); // index 7981
+    if (insert("Lucas", 22)) {
+        std::cout << "Lucas was insterted" << std::endl;
+    } else {
+        std::cout << "Lucas wasn't inserted" << std::endl;
+    }
+
+    if (find("Lucas")) {
+        std::cout << "Lucas was found" << std::endl;
+    }else {
+        std::cout << "Lucas wasn't found" << std::endl;
+    }
 
     if (hash_table_delete("Lucas")) {
-        std::cout << "true" << std::endl;
+        std::cout << "Lucas was deleted" << std::endl;
     }else {
-        std::cout << "false" << std::endl;
+        std::cout << "Lucas wasn't deleted" << std::endl;
     }
 
-    print_table();
+    if (find("Lucas")) {
+        std::cout << "Lucas was found" << std::endl;
+    }else {
+        std::cout << "Lucas wasn't found" << std::endl;
+    }
 
     if (insert("Lucas", 22)) {
-        std::cout << "true" << std::endl;
+        std::cout << "Lucas was insterted" << std::endl;
     } else {
-        std::cout << "false" << std::endl;
+        std::cout << "Lucas wasn't inserted" << std::endl;
     }
 
-    print_table();
+    if (find("Lucas")) {
+        std::cout << "Lucas was found" << std::endl;
+    }else {
+        std::cout << "Lucas wasn't found" << std::endl;
+    }
 
     return 0;
 }
