@@ -1,6 +1,7 @@
 #include "Person.h"
 
 #define TABLE_SIZE 10000
+#define DELETED_NODE ((Person*) (0xFFFFFFFFFFFFFFFFUL))
 
 Person* hashtable[TABLE_SIZE];
 
@@ -36,6 +37,19 @@ bool insert(const std::string& name, int age) {
     return true;
 }
 
+void print_table() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (hashtable[i] == NULL) {
+            printf("\t%i\t---\n", i);
+        } else if (hashtable[i] == DELETED_NODE) {
+            printf("\t%i\t---<DELETED>\n", i);
+        } else {
+            printf("\t%i\t%s\n", i, hashtable[i]->name.c_str());
+        }
+    }
+    printf("END\n");
+}
+
 int main() {
 
     init_hashtable();
@@ -45,6 +59,8 @@ int main() {
     } else {
         std::cout << "false" << std::endl;
     }
+
+    print_table(); // index 7981
 
     return 0;
 }
