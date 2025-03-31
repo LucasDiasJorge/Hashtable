@@ -7,7 +7,7 @@
 
 Person* hashtable[TABLE_SIZE] = {nullptr};
 
-void init_hashtable() {
+void reset_hashtable() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         hashtable[i] = nullptr;
     }
@@ -81,8 +81,6 @@ bool hash_table_delete(const std::string& name) {
 
 int main() {
 
-    //init_hashtable();
-
     if (find("Lucas")) {
         std::cout << "Lucas was found" << std::endl;
     }else {
@@ -127,5 +125,9 @@ int main() {
 
     print_table();
 
+    reset_hashtable();
+
+    print_table();
+    
     return 0;
 }
