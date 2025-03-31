@@ -5,7 +5,7 @@
 #define TABLE_SIZE 10000
 #define DELETED_NODE ((Person*) (0xFFFFFFFFFFFFFFFFUL))
 
-Person* hashtable[TABLE_SIZE];
+Person* hashtable[TABLE_SIZE] = {nullptr};
 
 void init_hashtable() {
     for (int i = 0; i < TABLE_SIZE; i++) {
@@ -81,7 +81,7 @@ bool hash_table_delete(const std::string& name) {
 
 int main() {
 
-    init_hashtable();
+    //init_hashtable();
 
     if (find("Lucas")) {
         std::cout << "Lucas was found" << std::endl;
@@ -124,6 +124,8 @@ int main() {
     }else {
         std::cout << "Lucas wasn't found" << std::endl;
     }
+
+    print_table();
 
     return 0;
 }
